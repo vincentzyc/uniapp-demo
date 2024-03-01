@@ -1,55 +1,60 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
-    <view>
-      <text class="title">测试</text>
-    </view>
-    <uni-badge text="1"></uni-badge>
-    <uni-badge text="2" type="success"></uni-badge>
-    <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
-    <uni-card :is-shadow="false" is-full>
-			<text class="uni-h6">卡片组件通用来显示完整独立的一段信息，同时让用户理解他的作用。例如一篇文章的预览图、作者信息、时间等，卡片通常是更复杂和更详细信息的入口点。</text>
-		</uni-card>
-		<uni-section title="基础卡片" type="line">
-			<uni-card :is-shadow="false">
-				<text class="uni-body">这是一个基础卡片示例，内容较少，此示例展示了一个没有任何属性不带阴影的卡片。</text>
-			</uni-card>
-		</uni-section>
+  <view class="wrapper">
+    <!--  #ifdef  H5 -->
+    <img v-lazy="header" alt="靓号抢购" class="widthfull" />
+    <img v-lazy="img1" alt="产品说明" class="widthfull" />
+    <img v-lazy="img2" alt="产品说明" class="widthfull" />
+    <img v-lazy="img3" alt="领卡流程" class="widthfull" />
+    <img v-lazy="img4" alt="领卡流程" class="widthfull" />
+    <img v-lazy="button" alt="领卡流程" class="widthfull" />
+    <!--  #endif -->
+    <!--  #ifdef  MP -->
+    <image lazy-load :src="header" alt="靓号抢购" class="widthfull" />
+    <image lazy-load :src="img1" alt="产品说明" class="widthfull" />
+    <image lazy-load :src="img2" alt="产品说明" class="widthfull" />
+    <image lazy-load :src="img3" alt="领卡流程" class="widthfull" />
+    <image lazy-load :src="img4" alt="领卡流程" class="widthfull" />
+    <image lazy-load :src="button" alt="领卡流程" class="widthfull" />
+    <!--  #endif -->
+    <!-- <CountDown class="mg-b10" /> -->
+    <!-- <view class="form-wrapper">
+      <BaseForm animteBtn />
+    </view> -->
+    <!-- <MarqueeSingle class="mg10" /> -->
+    <!-- <image lazy-load src="@/assets/img/home/img1.jpg" alt="产品说明" class="widthfull" />
+    <image lazy-load src="@/assets/img/home/img2.jpg" alt="产品说明" class="widthfull" /> -->
+    <!-- <view class="text-center expenses-wrap">
+      <span class="expenses-text" @click="showExpenses()">
+        <img lazy-load src="@/assets/img/home/img4.jpg" alt="资费详情说明" class="widthfull" />
+      </span>
+    </view> -->
+    <!-- <van-popup class="agreement-popup" v-model:show="show" round>
+      <view class="agreement-wrap">{{ expensesText }}</view>
+      <view class="agreement-confirm" @click="close()">我知道了</view>
+    </van-popup> -->
+    <!-- <image lazy-load src="@/assets/img/home/img3.jpg" alt="领卡流程" class="widthfull" />
+    <image lazy-load src="@/assets/img/home/button.png" alt="领卡流程" class="widthfull" />
+    <image lazy-load src="@/assets/img/home/img4.jpg" alt="领卡流程" class="widthfull" /> -->
   </view>
 </template>
 
 <script setup lang="ts">
+// import { expensesText } from './static-data';
+import header from '@/assets/img/home/header.jpg';
+import img1 from '@/assets/img/home/img1.jpg'
+import img2 from '@/assets/img/home/img2.jpg'
+import img3 from '@/assets/img/home/img3.jpg';
+import img4 from '@/assets/img/home/img4.jpg'
+import button from '@/assets/img/home/button.png'
 import { ref } from 'vue';
-const title = ref('Hello');
+// import { getBaseData } from '@/composition/business/useGetPidData';
+
+let show = ref(false);
+function showExpenses() {
+  show.value = true;
+}
+function close() {
+  show.value = false;
+}
+// getBaseData();
 </script>
-
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
-</style>
