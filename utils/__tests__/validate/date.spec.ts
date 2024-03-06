@@ -1,3 +1,4 @@
+import { test,expect } from 'vitest';
 import { isDate } from '../../validate/date'
 
 test('date', () => {
