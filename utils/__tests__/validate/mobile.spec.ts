@@ -1,3 +1,4 @@
+import { test,expect } from 'vitest';
 import { isMobile } from '../../validate/mobile';
 
 test('isMobile', () => {
