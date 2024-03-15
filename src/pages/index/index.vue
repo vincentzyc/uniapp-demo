@@ -2,8 +2,16 @@
   <view class="wrapper">
     <!--  #ifdef  H5 -->
     <img v-lazy="header" alt="靓号抢购" class="widthfull" />
+    <uni-card :is-shadow="false" is-full>
+			<text class="text-16">卡片组件通用来显示完整独立的一段信息，同时让用户理解他的作用。例如一篇文章的预览图、作者信息、时间等，卡片通常是更复杂和更详细信息的入口点。</text>
+		</uni-card>
     <img v-lazy="img1" alt="产品说明" class="widthfull" />
     <img v-lazy="img2" alt="产品说明" class="widthfull" />
+    <MarqueeSingle />
+    <uni-badge text="1"></uni-badge>
+    <uni-badge text="2" type="success"></uni-badge>
+    <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
+
     <img v-lazy="img3" alt="领卡流程" class="widthfull" />
     <img v-lazy="img4" alt="领卡流程" class="widthfull" />
     <img v-lazy="button" alt="领卡流程" class="widthfull" />
@@ -41,11 +49,11 @@
 <script setup lang="ts">
 // import { expensesText } from './static-data';
 import header from '@/assets/img/home/header.jpg';
-import img1 from '@/assets/img/home/img1.jpg'
-import img2 from '@/assets/img/home/img2.jpg'
+import img1 from '@/assets/img/home/img1.jpg';
+import img2 from '@/assets/img/home/img2.jpg';
 import img3 from '@/assets/img/home/img3.jpg';
-import img4 from '@/assets/img/home/img4.jpg'
-import button from '@/assets/img/home/button.png'
+import img4 from '@/assets/img/home/img4.jpg';
+import button from '@/assets/img/home/button.png';
 import { ref } from 'vue';
 // import { getBaseData } from '@/composition/business/useGetPidData';
 
@@ -58,3 +66,10 @@ function close() {
 }
 // getBaseData();
 </script>
+
+<style lang="scss" scoped>
+.text-16 {
+  font-size: 32rpx;
+  line-height: 1.2;
+}
+</style>
