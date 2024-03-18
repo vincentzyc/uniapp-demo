@@ -66,10 +66,3 @@ function close() {
 }
 // getBaseData();
 </script>
-
-<style lang="scss" scoped>
-.text-16 {
-  font-size: 32rpx;
-  line-height: 1.2;
-}
-</style>
