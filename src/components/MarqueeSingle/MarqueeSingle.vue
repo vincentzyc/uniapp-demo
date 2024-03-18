@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
-import "./style.less";
+import "./style.scss";
 let animate = ref(false);
 
 let animateTimeId: NodeJS.Timeout;
