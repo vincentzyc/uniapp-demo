@@ -1,7 +1,8 @@
 <template>
-  <div class="countdown" v-if="!isFinished">
+  <div class="countdown">
     <p class="flex flex-center">
-      <van-count-down :time="endTime" @finish="finished" class="countdown-time flex-inline align-middle">
+      倒计时
+      <!-- <van-count-down :time="endTime" @finish="finished" class="countdown-time flex-inline align-middle">
         <template #default="timeData">
           <span class="countdown-timeblock" v-if="timeData.days > 0">{{ timeData.days }}</span>
           <span class="countdown-colon" v-if="timeData.days > 0">天</span>
@@ -20,7 +21,7 @@
           }}</span>
           <span class="countdown-colon">秒</span>
         </template>
-      </van-count-down>
+      </van-count-down> -->
     </p>
   </div>
 </template>
