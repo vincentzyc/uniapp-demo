@@ -26,7 +26,8 @@
 </template>
 
 <script lang="ts" setup>
-import "./style.less";
+import { ref } from "vue";
+import "./style.scss";
 
 let isFinished = ref(false),
   endTime = ref(0);
