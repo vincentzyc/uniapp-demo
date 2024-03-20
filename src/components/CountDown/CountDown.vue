@@ -1,49 +1,22 @@
 <template>
   <div class="countdown">
     <p class="flex flex-center">
-      倒计时
-      <!-- <van-count-down :time="endTime" @finish="finished" class="countdown-time flex-inline align-middle">
-        <template #default="timeData">
-          <span class="countdown-timeblock" v-if="timeData.days > 0">{{ timeData.days }}</span>
-          <span class="countdown-colon" v-if="timeData.days > 0">天</span>
-          <span class="countdown-timeblock" v-if="timeData.days > 0 || timeData.hours > 0">{{
-            timeData.hours > 9 ? timeData.hours : "0" + timeData.hours
-          }}</span>
-          <span class="countdown-colon" v-if="timeData.days > 0 || timeData.hours > 0">时</span>
-          <span class="countdown-timeblock" v-if="timeData.days > 0 || timeData.hours > 0 || timeData.minutes > 0">{{
-            timeData.minutes > 9 ? timeData.minutes : "0" + timeData.minutes
-          }}</span>
-          <span class="countdown-colon" v-if="timeData.days > 0 || timeData.hours > 0 || timeData.minutes > 0"
-            >分</span
-          >
-          <span class="countdown-timeblock">{{
-            timeData.seconds > 9 ? timeData.seconds : "0" + timeData.seconds
-          }}</span>
-          <span class="countdown-colon">秒</span>
-        </template>
-      </van-count-down> -->
+      <uni-countdown :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond" />
     </p>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import "./style.scss";
+import { ref } from 'vue';
+import './style.scss';
 
-let isFinished = ref(false),
-  endTime = ref(0);
+const testHour = ref(1),
+  testMinute = ref(0),
+  testSecond = ref(0);
 
-function finished() {
-  isFinished.value = true;
-}
 function getDayLoopEndTime() {
   const today = new Date().toLocaleDateString();
   const todayTimeStamp = new Date(today).getTime();
   return todayTimeStamp + 24 * 60 * 60 * 1000;
 }
-function initCountDown() {
-  endTime.value = getDayLoopEndTime() - Date.now();
-}
-
-initCountDown();
 </script>
