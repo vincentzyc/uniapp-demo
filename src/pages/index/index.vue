@@ -8,6 +8,7 @@
     <img v-lazy="img1" alt="产品说明" class="widthfull" />
     <img v-lazy="img2" alt="产品说明" class="widthfull" />
     <MarqueeSingle />
+    <CountDown />
     <uni-badge text="1"></uni-badge>
     <uni-badge text="2" type="success"></uni-badge>
     <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
