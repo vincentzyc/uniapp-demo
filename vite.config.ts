@@ -2,7 +2,7 @@
 
 import { defineConfig } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
-import postcssPxtorpx from './postcss-pxtorpx.ts';
+import postcssPxtorpx from './postcss-pxtorpx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
