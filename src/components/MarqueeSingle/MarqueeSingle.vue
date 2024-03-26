@@ -4,7 +4,7 @@
       <li
         v-for="(text, i) in scrollList"
         :class="['flex', 'align-middle', 'scroll-item', { anim: animate && i === 0 }]"
-        :style="{ marginTop: animate && i === 0 ? '-1rem' : '' }"
+        :style="{ marginTop: animate && i === 0 ? '-100rpx' : '' }"
       >
         <span :class="['userimg', 'flex-none', text.sex === 'man' ? 'man' : 'woman']"></span>
         <span class="scroll-text txtover">{{ text.text }}</span>
