@@ -23,14 +23,14 @@ const testHour = ref(0),
 
 // 获取当前时间距离0点的时分秒
 function getDayLoopEndTime() {
-  const now = new Date();
-  const tomorrowMidnight = new Date(now);
-  tomorrowMidnight.setDate(now.getDate() + 1);
-  tomorrowMidnight.setHours(0, 0, 0, 0);
-  const timeDiff = Number(tomorrowMidnight) - Number(now);
-  const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+  const end = new Date();
+  end.setHours(0, 0, 0, 0);
+  end.setDate(end.getDate() + 1);
+  const now = Date.now();
+  const diff: number = end.getTime() - now;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
   testHour.value = hours;
   testMinute.value = minutes;
   testSecond.value = seconds;
