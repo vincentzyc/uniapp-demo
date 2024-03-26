@@ -1,5 +1,6 @@
 import { createSSRApp } from "vue";
 import VueLazyload from 'vue-lazyload'  
+import './assets/css/base.css'
 import './assets/css/main.scss'
 import App from "./App.vue";
 export function createApp() {
