@@ -8,6 +8,7 @@
     <uni-card  margin="10px">
       <text>例如一篇文章的预览图、作者信息、时间等，卡片通常是更复杂和更详细信息的入口点。</text>
     </uni-card>
+    <BaseForm animteBtn/>
     <img v-lazy="img1" alt="产品说明" class="widthfull" />
     <img v-lazy="img2" alt="产品说明" class="widthfull" />
     <MarqueeSingle />
@@ -59,6 +60,7 @@ import img3 from '@/assets/img/home/img3.jpg';
 import img4 from '@/assets/img/home/img4.jpg';
 import button from '@/assets/img/home/button.png';
 import { ref } from 'vue';
+import BaseForm from '@/components/BaseForm/BaseForm.vue';
 // import { getBaseData } from '@/composition/business/useGetPidData';
 
 let show = ref(false);
