@@ -14,9 +14,10 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent } from 'vue';
+
 // import { checkName } from '@/composition/business/useVerifyData'
 
-import { showToast } from 'vant';
 export default defineComponent({
   name: 'FormName',
   props: {
@@ -30,7 +31,7 @@ export default defineComponent({
     checkedName(v: string) {
       const checkRes = this.checkName(v);
       if (checkRes === true) return true;
-      showToast(checkRes);
+      uni.showToast({ title: checkRes });
     },
     checkName(value: string) {
       if (!value) return '请输入领卡姓名';
