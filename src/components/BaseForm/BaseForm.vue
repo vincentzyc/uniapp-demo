@@ -7,6 +7,7 @@
       <FormCity v-model="formData.addressArr" id="addressArr" :locationCity="mainStore.locationCity"></FormCity>
       <FormAddress id="address" v-model="formData.address"></FormAddress>
     </div> -->
+    <FormAddress id="address" v-model="formData.address"></FormAddress>
     <img src="@/assets/img/home/button.png" alt="提交按钮" class="breathlamp widthfull" @click="submitOrder()" />
     <!-- <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" /> -->
   </div>
@@ -14,6 +15,7 @@
 
 <script lang="ts" setup>
 import FormName from '@/components/FormItem/FormName.vue'
+import FormAddress from '@/components/FormItem/FormAddress.vue'
 import Check from '@/utils/business/form-check';
 // import { useMainStore } from '@/pinia';
 import { closeLoading, openLoading } from '@/utils/loading';
