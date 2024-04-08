@@ -14,30 +14,38 @@
 </template>
 
 <script lang="ts">
-import { checkIDCard } from '@/composition/business/useVerifyData'
+import { computed, defineComponent } from 'vue';
+import {isValidIDCard} from '@/utils/validate/idcard'
 
 export default defineComponent({
-  name: "FormIDCard",
+  name: 'FormName',
   props: {
     modelValue: {
       required: true,
       type: String,
-    }
+    },
   },
   emits: ['update:modelValue'],
+  methods: {
+    checkIDCard(value: string) {
+      if (!value) return uni.showToast({ title: '请输入身份证号' });
+      const checkRes = isValidIDCard(value);
+      if (checkRes === true) return true;
+      return uni.showToast({ title: '请输入正确的身份证号' });
+    },
+  },
   setup(props, { emit }) {
     const model = computed<string>({
       get() {
         return props.modelValue;
       },
       set(val) {
-        emit("update:modelValue", val);
-      }
-    })
+        emit('update:modelValue', val);
+      },
+    });
     return {
       model,
-      checkIDCard,
-    }
-  }
-})
+    };
+  },
+});
 </script>
