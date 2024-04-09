@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-import {isValidIDCard} from '@/utils/validate/idcard'
+import { isValidIDCard } from '@/utils/validate/idcard';
 
 export default defineComponent({
   name: 'FormName',
