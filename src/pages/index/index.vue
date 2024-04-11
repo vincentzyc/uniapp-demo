@@ -61,6 +61,7 @@ import img4 from '@/assets/img/home/img4.jpg';
 import button from '@/assets/img/home/button.png';
 import { ref } from 'vue';
 import BaseForm from '@/components/BaseForm/BaseForm.vue';
+import type CountDown from '@/components/CountDown/CountDown.vue';
 // import { getBaseData } from '@/composition/business/useGetPidData';
 
 let show = ref(false);
