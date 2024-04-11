@@ -16,8 +16,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 
-// import { checkName } from '@/composition/business/useVerifyData'
-
 export default defineComponent({
   name: 'FormName',
   props: {
