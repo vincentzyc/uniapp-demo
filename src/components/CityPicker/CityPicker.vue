@@ -52,7 +52,8 @@ const changePopup = (e: any) => {
 };
 
 const popup = ref();
-const open = () => {
+
+function open() {
   popup.value.open();
   // 判断有没有传默认省市进来 有则筛选出对应省市区,没有则默认第一个省市区
   if (props.cityInfo && props.cityInfo.province && props.provinceList && props.provinceList.length) {
@@ -89,12 +90,12 @@ const open = () => {
   }
 };
 
-const close = () => {
+function close() {
   popup.value.close();
   emit('closePopup');
 };
 
-const handleSelect = () => {
+function handleSelect() {
   const province = props.provinceList[value.value[0]];
   const city = cityList.value[value.value[1]];
   cityList.value = city.cityList;
@@ -113,7 +114,7 @@ const handleSelect = () => {
   popup.value.close();
 };
 
-const pickerChange = (e: any) => {
+function pickerChange(e: any) {
   // console.log(value.value, e.detail.value);
   if (value.value[0] !== e.detail.value[0] && props.provinceList[e.detail.value[0]]) {
     value.value = e.detail.value;
