@@ -1,0 +1,31 @@
+.contentBox {
+  background-color: #fff;
+}
+
+.picker-view {
+  width: 750rpx;
+  height: 500rpx;
+  margin: 0 auto;
+}
+
+.picker-view .item {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 32rpx;
+  line-height: 64rpx;
+}
+
+.titleBox {
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+}
+
+.cancel {
+  color: #999;
+}
