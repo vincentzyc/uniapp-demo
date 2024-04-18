@@ -149,7 +149,7 @@ defineExpose({
   open,
 });
 </script>
-
+<!-- 
 <style scoped>
 @import './css/index.css';
-</style>
+</style> -->
