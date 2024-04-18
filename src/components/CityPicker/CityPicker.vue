@@ -1,79 +1,155 @@
 <template>
-  <van-popup
-    :lazy-render="false"
-    position="bottom"
-    v-model:show="isShow"
-    :close-on-click-overlay="false"
-    @closed="closedPopup"
-    teleport="body"
-  >
-    <van-picker
-      visible-option-num="9"
-      option-height="36"
-      swipe-duration="500"
-      :columns="columns"
-      :columns-field-names="customFieldName"
-      show-toolbar
-      v-model="selectCity"
-      title="请选择"
-      @cancel="cancel"
-      @confirm="confirm"
-    />
-  </van-popup>
+  <uni-popup ref="popup" mask-background-color="rgba(0,0,0,0.6)" @change="changePopup" type="bottom" @maskClick="close"
+    background-color="#fff">
+    <view class="contentBox">
+      <view class="titleBox">
+        <view class="cancel" @click="close">取消</view>
+        <view class="confirm" @click="handleSelect">确定</view>
+      </view>
+      <picker-view :value="value" class="picker-view" @change="pickerChange">
+        <picker-view-column>
+          <view class="item" v-for="(item, index) in provinceList" :key="index">{{ item.cityName }}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="item" v-for="(item, index) in cityList" :key="index">{{ item.cityName }}</view>
+        </picker-view-column>
+        <picker-view-column v-if="columnsNum == 3">
+          <view class="item" v-for="(item, index) in areaList" :key="index">{{ item.cityName }}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </uni-popup>
 </template>
 
-<script setup lang="ts">
-// https://cdn.lipush.com/junbo/js/city@1.0.0.js
-import CITY from './city.js';
-import { computed, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-interface Props {
-  show: boolean;
-  level?: number | string;
-  locationCity: string[];
-}
-const props = withDefaults(defineProps<Props>(), {
-  show: false,
-  level: 3,
-  locationCity: () => [''],
+const props = defineProps({
+  provinceList: {
+    type: Array as any,
+    default: () => [],
+  },
+  cityInfo: {
+    type: Object as any,
+    default: () => ({}),
+  },
+  columnsNum: {
+    type: Number,
+    default: 2,
+  },
 });
 
-let isShow = computed({
-  get: () => props.show,
-  set: v => emits('update:show', v),
-});
+const emit = defineEmits(['changePopup', 'citycChange', 'closePopup']);
 
-const emits = defineEmits<{
-  (e: 'update:show', bool: boolean): void;
-  (e: 'selected', belong: string[]): void;
-}>();
+const cityList = ref<any>([]);
 
-const customFieldName = {
-  text: 'n',
-  value: 'n',
-  children: 'c',
+const areaList = ref<any>([]);
+
+const value = ref([0, 0, 0]);
+
+const changePopup = (e: any) => {
+  emit('changePopup', e);
 };
 
-let columns = ref<any[]>([]);
-let selectCity = ref(['']);
+const popup = ref();
+const open = () => {
+  popup.value.open();
+  // 判断有没有传默认省市进来 有则筛选出对应省市区,没有则默认第一个省市区
+  if (props.cityInfo && props.cityInfo.province && props.provinceList && props.provinceList.length) {
+    const provinceIndex = props.provinceList.findIndex((item: any) => item.cityName === props.cityInfo.province);
+    if (provinceIndex !== -1 && props.provinceList[provinceIndex].cityInfo) {
+      const cityIndex = props.provinceList[provinceIndex].cityInfo.findIndex(
+        (item: any) => item.cityName === props.cityInfo.city
+      );
+      if (cityIndex !== -1) {
+        // 2列
+        if (props.columnsNum === 2) {
+          value.value = [provinceIndex, cityIndex];
+          cityList.value = props.provinceList[provinceIndex].cityInfo;
+          return;
+        }
+        // 3列
+        if (props.provinceList[provinceIndex].cityInfo[cityIndex].cityInfo) {
+          const areaIndex = props.provinceList[provinceIndex].cityInfo[cityIndex].cityInfo.findIndex(
+            (item: any) => item.cityName === props.cityInfo.district
+          );
+          if (areaIndex !== -1) {
+            value.value = [provinceIndex, cityIndex, areaIndex];
+            cityList.value = props.provinceList[provinceIndex].cityInfo;
+            areaList.value = props.provinceList[provinceIndex].cityInfo[cityIndex].cityInfo;
+          }
+        }
+      }
+    }
+  } else if (props.provinceList && props.provinceList.length && props.provinceList[0].cityInfo) {
+    cityList.value = props.provinceList[0].cityInfo;
+    if (props.columnsNum === 3 && props.provinceList[0].cityInfo[0].cityInfo) {
+      areaList.value = props.provinceList[0].cityInfo[0].cityInfo;
+    }
+  }
+};
 
-function initCity() {
-  if (props.level == 2) return (columns.value = CITY.map(l1 => ({ n: l1.n, c: l1.c.map(l2 => ({ n: l2.n })) })));
-  if (props.level == 1) return (columns.value = CITY.map(l1 => ({ n: l1.n })));
-  return (columns.value = CITY);
-}
+const close = () => {
+  popup.value.close();
+  emit('closePopup');
+};
 
-initCity();
+const handleSelect = () => {
+  const province = props.provinceList[value.value[0]];
+  const city = cityList.value[value.value[1]];
+  cityList.value = city.cityList;
+  let district = '';
 
-function confirm(v: PickerConfirmEventParams) {
-  isShow.value = false;
-}
-function cancel(v: PickerCancelEventParams) {
-  isShow.value = false;
-}
+  if (props.columnsNum === 3) {
+    district = areaList.value[value.value[2]];
+  }
+  // console.log(province, city, district);
 
-function closedPopup() {
-  console.log('关闭弹窗');
-  emits('selected', selectCity.value);
-}
+  emit('citycChange', {
+    province,
+    city,
+    district,
+  });
+  popup.value.close();
+};
+
+const pickerChange = (e: any) => {
+  // console.log(value.value, e.detail.value);
+  if (value.value[0] !== e.detail.value[0] && props.provinceList[e.detail.value[0]]) {
+    value.value = e.detail.value;
+    cityList.value = props.provinceList[e.detail.value[0]].cityInfo;
+    // 省更改 其他列默认第一个
+    value.value = [e.detail.value[0], 0];
+    if (props.columnsNum === 3 && props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]]) {
+      areaList.value = props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]].cityInfo;
+      // 省更改 其他列默认第一个
+      value.value = [e.detail.value[0], 0, 0];
+    } else {
+      areaList.value = [];
+    }
+  } else if (
+    value.value[1] !== e.detail.value[1] &&
+    props.provinceList[e.detail.value[0]] &&
+    props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]]
+  ) {
+    value.value = e.detail.value;
+    if (props.columnsNum === 3) {
+      areaList.value = props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]].cityInfo;
+      // 市更改 其他列默认第一个
+      value.value = [e.detail.value[0], e.detail.value[1], 0];
+    } else {
+      areaList.value = [];
+    }
+  } else {
+    value.value = e.detail.value;
+  }
+};
+
+defineExpose({
+  open,
+});
 </script>
+
+<style scoped>
+@import './css/index.css';
+</style>
