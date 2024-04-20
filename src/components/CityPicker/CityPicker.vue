@@ -23,6 +23,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import CITY from './city.js';
 
 const props = defineProps({
   provinceList: {
@@ -55,6 +56,7 @@ const popup = ref();
 
 function open() {
   popup.value.open();
+  console.log(CITY)
   // 判断有没有传默认省市进来 有则筛选出对应省市区,没有则默认第一个省市区
   if (props.cityInfo && props.cityInfo.province && props.provinceList && props.provinceList.length) {
     const provinceIndex = props.provinceList.findIndex((item: any) => item.cityName === props.cityInfo.province);
@@ -150,7 +152,7 @@ defineExpose({
   open,
 });
 </script>
-<!-- 
+
 <style scoped>
 @import './css/index.css';
-</style> -->
+</style>
