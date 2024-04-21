@@ -2,10 +2,11 @@
   <div class="flex align-middle form-item">
     <div class="form-label">收货城市</div>
     <!-- <div @click="openCityPicker()" class="form-input flex-auto flex align-middle disabled-input"> -->
-    <div class="form-input flex flex-auto align-middle disabled-input">
+    <div @click="openCityPicker()" class="form-input flex flex-auto align-middle disabled-input">
       <div class="wg-input" :class="{ placeholder: !showValue }">{{ showValue ? showValue : "请选择收货城市" }}</div>
     </div>
     <!-- <CityPicker @selected="closePicker" :locationCity="locationCity" ref="domCityPicker" v-model:show="showPicker" /> -->
+    <CityPicker ref="domCityPicker" />
   </div>
 </template>
 
@@ -33,9 +34,9 @@ export default defineComponent({
       return props.modelValue.length > 0 ? props.modelValue.join(" ") : "";
     });
 
-    // const openCityPicker = () => {
-    //   showPicker.value = true;
-    // };
+    const openCityPicker = () => {
+      domCityPicker.value.open()
+    };
     // const closePicker = (val: string[]) => {
     //   if (Array.isArray(val) && val.length === 3) {
     //     emit("update:modelValue", val);
@@ -47,7 +48,7 @@ export default defineComponent({
       showValue,
       domCityPicker,
       // checkCity,
-      // openCityPicker,
+      openCityPicker,
       // closePicker,
     };
   },
