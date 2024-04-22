@@ -8,6 +8,7 @@
     </div> -->
     <FormAddress id="address" v-model="formData.address"></FormAddress>
     <FormIDCard id="idCardNo" v-model="formData.idCardNo"></FormIDCard>
+    <FormCity id="cityArr" v-model="formData.cityArr" ></FormCity>
     <img src="@/assets/img/home/button.png" alt="提交按钮" class="breathlamp widthfull" @click="submitOrder()" />
     <!-- <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" /> -->
   </div>
@@ -17,12 +18,12 @@
 import FormName from '@/components/FormItem/FormName.vue';
 import FormAddress from '@/components/FormItem/FormAddress.vue';
 import FormIDCard from '@/components/FormItem/FormIDCard.vue';
+import FormCity from '@/components/FormItem/FormCity.vue';
 import Check from '@/utils/business/form-check';
 // import { useMainStore } from '@/pinia';
 import { closeLoading, openLoading } from '@/utils/loading';
 // import { CommonApi } from '@/api';
 // import { checkOut } from '@/composition/business/useVerifyData';
-// import { reportMatomo } from '@/utils/report';
 import './style.scss';
 import { computed, reactive, ref, watch } from 'vue';
 
@@ -43,7 +44,7 @@ const emits = defineEmits<{
 // const mainStore = useMainStore();
 
 const formData = reactive({
-  addressArr: [],
+  cityArr: [],
   showForm: false,
   custName: '',
   city: '',
@@ -80,7 +81,7 @@ const showOtherForm = computed(() => {
 });
 
 watch(
-  () => formData.addressArr,
+  () => formData.cityArr,
   newValue => {
     if (Array.isArray(newValue) && newValue.length === 3) {
       formData.city = newValue[1];
@@ -114,7 +115,6 @@ const submitOrder = async () => {
     successCallback();
   }, 2000);
   // let res = await CommonApi.submitForm<Record<string, any>>(params);
-  // reportMatomo('提交接口返回', JSON.stringify(res));
   // if (res.responseCode === '0') {
   //   successCallback({ resData: res, mediaCode: mainStore.cjData?.mediaCode });
   // } else {
