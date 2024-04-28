@@ -2,7 +2,7 @@
 
 interface TYPE_CITY_ITEM {
   n: string;
-  c?: TYPE_CITY_ITEM;
+  c?: TYPE_CITY;
 }
 
 export type TYPE_CITY = TYPE_CITY_ITEM[];
