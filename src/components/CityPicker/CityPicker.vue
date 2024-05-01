@@ -41,7 +41,7 @@ const props = defineProps({
 });
 
 
-const emit = defineEmits(['changePopup', 'citycChange', 'closePopup']);
+const emit = defineEmits(['change', 'citycChange', 'close']);
 
 const provinceList = ref<string[]>([]);
 
@@ -51,8 +51,8 @@ const areaList = ref<any>([]);
 
 const value = ref([0, 0, 0]);
 
-const changePopup = (e: any) => {
-  emit('changePopup', e);
+const changePopup = (e: {show: boolean, type: string}) => {
+  emit('change', e);
 };
 
 const popup = ref();
@@ -96,7 +96,7 @@ function open() {
 
 function close() {
   popup.value.close();
-  emit('closePopup');
+  emit('close');
 };
 
 function handleSelect() {
@@ -162,7 +162,6 @@ function setCityData(pickIndexArr:number[]){
 function initData() { 
   provinceList.value = CITY.map((item) => item.n)
   setCityData([0, 0, 0])
-  console.log(CITY)
 }
 
 initData()
