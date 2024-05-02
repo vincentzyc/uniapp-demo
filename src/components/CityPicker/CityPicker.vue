@@ -6,7 +6,7 @@
         <view class="cancel" @click="close">取消</view>
         <view class="confirm" @click="handleSelect">确定</view>
       </view>
-      <picker-view :value="value" class="picker-view" @change="pickerChange">
+      <picker-view :value="pickIndexArr" class="picker-view" @change="pickerChange">
         <picker-view-column>
           <view class="item" v-for="(item, index) in provinceList" :key="index">{{ item }}</view>
         </picker-view-column>
@@ -49,7 +49,7 @@ const cityList = ref<any>([]);
 
 const areaList = ref<any>([]);
 
-const value = ref([0, 0, 0]);
+const pickIndexArr = ref([0, 0, 0]);
 
 const changePopup = (e: {show: boolean, type: string}) => {
   emit('change', e);
@@ -100,27 +100,26 @@ function close() {
 };
 
 function handleSelect() {
-  // const province = props.provinceList[value.value[0]];
-  // const city = cityList.value[value.value[1]];
-  // cityList.value = city.cityList;
-  // let district = '';
+  const province = provinceList.value[pickIndexArr.value[0]];
+  const city = cityList.value[pickIndexArr.value[1]];
+  let district = '';
 
-  // if (props.columnsNum === 3) {
-  //   district = areaList.value[value.value[2]];
-  // }
-  // console.log(province, city, district);
+  if (props.columnsNum === 3) {
+    district = areaList.value[pickIndexArr.value[2]];
+  }
+  console.log(province, city, district);
 
-  // emit('citycChange', {
-  //   province,
-  //   city,
-  //   district,
-  // });
-  // popup.value.close();
+  emit('citycChange', {
+    province,
+    city,
+    district,
+  });
+  close();
 };
 
-function pickerChange(e:any) {
-  const pickIndexArr:number[] = e.detail.value
-  setCityData(pickIndexArr)
+function pickerChange(e:Record<string, any>) {
+  pickIndexArr.value = e.detail.value
+  setCityData(pickIndexArr.value)
   // if (value.value[0] !== e.detail.value[0] && props.provinceList[e.detail.value[0]]) {
   //   value.value = e.detail.value;
   //   cityList.value = props.provinceList[e.detail.value[0]].cityInfo;
