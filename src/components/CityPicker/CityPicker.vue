@@ -1,5 +1,5 @@
 <template>
-  <uni-popup ref="popup" mask-background-color="rgba(0,0,0,0.6)" @change="changePopup" type="bottom" @maskClick="close"
+  <uni-popup ref="popup" mask-background-color="rgba(0,0,0,0.6)" type="bottom" @maskClick="close"
     background-color="#fff">
     <view class="contentBox">
       <view class="titleBox">
@@ -13,7 +13,7 @@
         <picker-view-column>
           <view class="item" v-for="(item, index) in cityList" :key="index">{{ item }}</view>
         </picker-view-column>
-        <picker-view-column v-if="columnsNum == 3">
+        <picker-view-column v-if="column == 3">
           <view class="item" v-for="(item, index) in areaList" :key="index">{{ item }}</view>
         </picker-view-column>
       </picker-view>
@@ -34,14 +34,14 @@ const props = defineProps({
   //   type: Object as any,
   //   default: () => ({}),
   // },
-  columnsNum: {
+  column: {
     type: Number,
     default: 3,
   },
 });
 
 
-const emit = defineEmits(['change', 'citycChange', 'close']);
+const emit = defineEmits(['change', 'close']);
 
 const provinceList = ref<string[]>([]);
 
@@ -50,10 +50,6 @@ const cityList = ref<any>([]);
 const areaList = ref<any>([]);
 
 const pickIndexArr = ref([0, 0, 0]);
-
-const changePopup = (e: {show: boolean, type: string}) => {
-  emit('change', e);
-};
 
 const popup = ref();
 
@@ -68,7 +64,7 @@ function open() {
   //     );
   //     if (cityIndex !== -1) {
   //       // 2列
-  //       if (props.columnsNum === 2) {
+  //       if (props.column === 2) {
   //         value.value = [provinceIndex, cityIndex];
   //         cityList.value = props.provinceList[provinceIndex].cityInfo;
   //         return;
@@ -88,7 +84,7 @@ function open() {
   //   }
   // } else if (props.provinceList && props.provinceList.length && props.provinceList[0].cityInfo) {
   //   cityList.value = props.provinceList[0].cityInfo;
-  //   if (props.columnsNum === 3 && props.provinceList[0].cityInfo[0].cityInfo) {
+  //   if (props.column === 3 && props.provinceList[0].cityInfo[0].cityInfo) {
   //     areaList.value = props.provinceList[0].cityInfo[0].cityInfo;
   //   }
   // }
@@ -104,12 +100,12 @@ function handleSelect() {
   const city = cityList.value[pickIndexArr.value[1]];
   let district = '';
 
-  if (props.columnsNum === 3) {
+  if (props.column === 3) {
     district = areaList.value[pickIndexArr.value[2]];
   }
   console.log(province, city, district);
 
-  emit('citycChange', {
+  emit('change', {
     province,
     city,
     district,
@@ -120,34 +116,6 @@ function handleSelect() {
 function pickerChange(e:Record<string, any>) {
   pickIndexArr.value = e.detail.value
   setCityData(pickIndexArr.value)
-  // if (value.value[0] !== e.detail.value[0] && props.provinceList[e.detail.value[0]]) {
-  //   value.value = e.detail.value;
-  //   cityList.value = props.provinceList[e.detail.value[0]].cityInfo;
-  //   // 省更改 其他列默认第一个
-  //   value.value = [e.detail.value[0], 0];
-  //   if (props.columnsNum === 3 && props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]]) {
-  //     areaList.value = props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]].cityInfo;
-  //     // 省更改 其他列默认第一个
-  //     value.value = [e.detail.value[0], 0, 0];
-  //   } else {
-  //     areaList.value = [];
-  //   }
-  // } else if (
-  //   value.value[1] !== e.detail.value[1] &&
-  //   props.provinceList[e.detail.value[0]] &&
-  //   props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]]
-  // ) {
-  //   value.value = e.detail.value;
-  //   if (props.columnsNum === 3) {
-  //     areaList.value = props.provinceList[e.detail.value[0]].cityInfo[e.detail.value[1]].cityInfo;
-  //     // 市更改 其他列默认第一个
-  //     value.value = [e.detail.value[0], e.detail.value[1], 0];
-  //   } else {
-  //     areaList.value = [];
-  //   }
-  // } else {
-  //   value.value = e.detail.value;
-  // }
 };
 
 function setCityData(pickIndexArr:number[]){
