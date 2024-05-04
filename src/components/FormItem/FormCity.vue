@@ -53,7 +53,7 @@ export default defineComponent({
       domCityPicker.value.open()
     };
     const pickCity = (val: string[]) => {
-      console.log(val)
+      emit("update:modelValue", val);
     }
     // const closePicker = (val: string[]) => {
     //   if (Array.isArray(val) && val.length === 3) {
