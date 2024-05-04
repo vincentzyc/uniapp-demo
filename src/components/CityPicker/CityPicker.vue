@@ -103,13 +103,7 @@ function handleSelect() {
   if (props.column === 3) {
     district = areaList.value[pickIndexArr.value[2]];
   }
-  console.log(province, city, district);
-
-  emit('change', {
-    province,
-    city,
-    district,
-  });
+  emit('change', [province, city, district]);
   close();
 };
 
