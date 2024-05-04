@@ -1,21 +1,21 @@
 <template>
-  <div class="flex align-middle form-item">
-    <div class="form-label">收货城市</div>
-    <!-- <div class="form-input flex-auto flex align-middle">
+  <view class="flex align-middle form-item">
+    <view class="form-label">收货城市</view>
+    <!-- <view class="form-input flex-auto flex align-middle">
       <input
         @click="openCityPicker()"
         placeholder="请选择收货城市"
         type="text"
         v-model.trim="model"
       />
-    </div> -->
-    <!-- <div @click="openCityPicker()" class="form-input flex-auto flex align-middle disabled-input"> -->
-    <div @click="openCityPicker()" class="form-input flex flex-auto align-middle disabled-input">
-      <div class="wg-input" :class="{ placeholder: !showValue }">{{ showValue ? showValue : "请选择收货城市" }}</div>
-    </div>
+    </view> -->
+    <!-- <view @click="openCityPicker()" class="form-input flex-auto flex align-middle disabled-input"> -->
+    <view @click="openCityPicker()" class="form-input flex flex-auto align-middle disabled-input">
+      <view class="wg-input" :class="{ placeholder: !showValue }">{{ showValue ? showValue : "请选择收货城市" }}</view>
+    </view>
     <!-- <CityPicker @selected="closePicker" :locationCity="locationCity" ref="domCityPicker" v-model:show="showPicker" /> -->
     <CityPicker ref="domCityPicker" @change="pickCity"/>
-  </div>
+  </view>
 </template>
 
 <script lang="ts">
