@@ -1,7 +1,7 @@
 <template>
-  <div class="flex align-middle form-item border-bnone">
-    <div class="form-label">详细地址</div>
-    <div class="form-input flex-auto flex align-middle">
+  <view class="flex align-middle form-item border-bnone">
+    <view class="form-label">详细地址</view>
+    <view class="form-input flex-auto flex align-middle">
       <input
         @blur="checkAddress(model)"
         :maxlength="50"
@@ -9,8 +9,8 @@
         type="text"
         v-model.trim="model"
       />
-    </div>
-  </div>
+    </view>
+  </view>
 </template>
 
 <script lang="ts">
