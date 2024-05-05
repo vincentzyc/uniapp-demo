@@ -1,7 +1,7 @@
 <template>
-  <div class="flex align-middle form-item">
-    <div class="form-label">领卡姓名</div>
-    <div class="form-input flex flex-auto align-middle">
+  <view class="flex align-middle form-item">
+    <view class="form-label">领卡姓名</view>
+    <view class="form-input flex flex-auto align-middle">
       <input
         @blur="checkName(model)"
         :maxlength="15"
@@ -9,8 +9,8 @@
         type="text"
         v-model.trim="model"
       />
-    </div>
-  </div>
+    </view>
+  </view>
 </template>
 
 <script lang="ts">
