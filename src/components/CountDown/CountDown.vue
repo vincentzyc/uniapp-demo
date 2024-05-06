@@ -1,9 +1,9 @@
 <template>
-  <div class="countdown">
-    <p class="flex flex-center">
+  <view class="countdown">
+    <text class="flex flex-center">
       <uni-countdown :show-day="false" :hour="testHour" :minute="testMinute" :second="testSecond" />
-    </p>
-  </div>
+    </text>
+  </view>
 </template>
 
 <script lang="ts" setup>
