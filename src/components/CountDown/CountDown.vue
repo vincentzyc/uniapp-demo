@@ -14,13 +14,6 @@ const testHour = ref(0),
   testMinute = ref(0),
   testSecond = ref(0);
 
-// function getDayLoopEndTime() {
-//   // const today = new Date().toLocaleDateString();
-//   // const todayTimeStamp = new Date(today).getTime();
-//   // return todayTimeStamp + 24 * 60 * 60 * 1000;
-//   // return hour * 60 * 60 + minute * 60 + second;
-// }
-
 // 获取当前时间距离0点的时分秒
 function getDayLoopEndTime() {
   const end = new Date();
