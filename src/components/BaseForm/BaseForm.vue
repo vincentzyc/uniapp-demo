@@ -1,14 +1,9 @@
 <template>
   <div class="form-wrap">
     <FormName id="custName" v-model="formData.custName"></FormName>
-    <!-- <FormPhone id="contactNumber" v-model="formData.contactNumber"></FormPhone>
-    <div v-show="showOtherForm && formData.showForm">
-      <FormCity v-model="formData.addressArr" id="addressArr" :locationCity="mainStore.locationCity"></FormCity>
-      <FormAddress id="address" v-model="formData.address"></FormAddress>
-    </div> -->
-    <FormAddress id="address" v-model="formData.address"></FormAddress>
     <FormIDCard id="idCardNo" v-model="formData.idCardNo"></FormIDCard>
     <FormCity id="cityArr" v-model="formData.cityArr" ></FormCity>
+    <FormAddress id="address" v-model="formData.address"></FormAddress>
     <img src="@/assets/img/home/button.png" alt="提交按钮" class="breathlamp widthfull" @click="submitOrder()" />
     <!-- <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" /> -->
   </div>
