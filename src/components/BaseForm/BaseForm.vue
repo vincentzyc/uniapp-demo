@@ -5,7 +5,7 @@
     <FormCity id="cityArr" v-model="formData.cityArr" ></FormCity>
     <FormAddress id="address" v-model="formData.address"></FormAddress>
     <img src="@/assets/img/home/button.png" alt="提交按钮" class="breathlamp widthfull" @click="submitOrder()" />
-    <!-- <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" /> -->
+    <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" />
   </div>
 </template>
 
@@ -120,21 +120,6 @@ const submitOrder = async () => {
   //   uni.showToast({ title: res.msg });
   // }
 };
-
-// async function successCallback(resData: Record<string, any>) {
-//   let realLink = '';
-//   setTimeout(() => {
-//     closeLoading();
-//     if (resData?.url) {
-//       realLink = resData.url;
-//     } else if (resData.mediaCode === 'M002') {
-//       realLink = gdtDefaultLink;
-//     } else {
-//       realLink = toutiaoDefaultLink;
-//     }
-//     window.location.href = realLink;
-//   }, 300);
-// }
 function successCallback() {
   uni.showModal({
     title: '提示',
