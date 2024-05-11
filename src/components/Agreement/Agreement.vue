@@ -1,7 +1,13 @@
 <template>
   <view>
     <checkbox  :checked="isChecked" />
-    <text>协议协议协议协议协议</text>
+    <text class="agreement-text">
+      <span>{{ title }}</span>
+      <span v-for="(agr, key) in agrList">
+        <!-- <span v-if="key > 0">和</span> -->
+        <!-- <span class="agreement-title" @click="openAgreement(agr.title, agr.text)">{{ agr.title }}</span> -->
+      </span>
+    </text>
   </view>
   <!-- <van-checkbox v-model="isChecked" icon-size="14px" checked-color="#cccccc" label-disabled @click="handleClick">
     <p class="agreement-text">
