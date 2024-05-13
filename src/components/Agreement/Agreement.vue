@@ -2,11 +2,11 @@
   <view>
     <checkbox  :checked="isChecked" />
     <text class="agreement-text">
-      <span>{{ title }}</span>
-      <span v-for="(agr, key) in agrList">
-        <!-- <span v-if="key > 0">和</span> -->
-        <!-- <span class="agreement-title" @click="openAgreement(agr.title, agr.text)">{{ agr.title }}</span> -->
-      </span>
+      <text>{{ title }}</text>
+      <text v-for="(agr, key) in agrList">
+        <text v-if="key > 0">和</text>
+        <text class="agreement-title" @click="openAgreement(agr.title, agr.text)">{{ agr.title }}</text>
+      </text>
     </text>
   </view>
   <!-- <van-checkbox v-model="isChecked" icon-size="14px" checked-color="#cccccc" label-disabled @click="handleClick">
@@ -47,10 +47,11 @@ const isChecked = computed({
 // let showPopup = ref(false),
 //   curText = ref('');
 
-// function openAgreement(title: string, text: string) {
-//   showPopup.value = true;
-//   curText.value = text;
-// }
+function openAgreement(title: string, text: string) {
+  console.log(title, text)
+  // showPopup.value = true;
+  // curText.value = text;
+}
 // function handleClick() {
 //   props.checked ? reportMatomo('勾选协议') : reportMatomo('取消勾选协议');
 // }
