@@ -9,16 +9,7 @@
       </text>
     </text>
   </view>
-  <!-- <van-checkbox v-model="isChecked" icon-size="14px" checked-color="#cccccc" label-disabled @click="handleClick">
-    <p class="agreement-text">
-      <span>{{ title }}</span>
-      <span v-for="(agr, key) in agrList">
-        <span v-if="key > 0">和</span>
-        <span class="agreement-title" @click="openAgreement(agr.title, agr.text)">{{ agr.title }}</span>
-      </span>
-    </p>
-  </van-checkbox>
-  <AgreementPopup v-model:show="showPopup" :text="curText" /> -->
+  <!--  <AgreementPopup v-model:show="showPopup" :text="curText" /> -->
 </template>
 
 <script setup lang="ts">
