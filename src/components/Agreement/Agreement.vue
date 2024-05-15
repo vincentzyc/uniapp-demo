@@ -9,13 +9,11 @@
       </text>
     </text>
   </view>
-  <!--  <AgreementPopup v-model:show="showPopup" :text="curText" /> -->
+   <AgreementPopup v-model:show="showPopup" :text="curText" />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-// import { reportMatomo } from '@/utils/report';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
   title: string;
@@ -35,13 +33,12 @@ const isChecked = computed({
   set: v => emits('update:checked', v),
 });
 
-// let showPopup = ref(false),
-//   curText = ref('');
+let showPopup = ref(false),
+  curText = ref('');
 
 function openAgreement(title: string, text: string) {
-  console.log(title, text)
-  // showPopup.value = true;
-  // curText.value = text;
+  showPopup.value = true;
+  curText.value = text;
 }
 // function handleClick() {
 //   props.checked ? reportMatomo('勾选协议') : reportMatomo('取消勾选协议');
