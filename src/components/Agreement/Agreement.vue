@@ -1,6 +1,6 @@
 <template>
   <view>
-    <checkbox  :checked="isChecked" />
+    <checkbox :checked="isChecked" />
     <text class="agreement-text">
       <text>{{ title }}</text>
       <text v-for="(agr, key) in agrList">
@@ -9,7 +9,7 @@
       </text>
     </text>
   </view>
-   <AgreementPopup v-model:show="showPopup" :text="curText" />
+  <AgreementPopup ref="refPopup" :text="curText" />
 </template>
 
 <script setup lang="ts">
@@ -33,14 +33,11 @@ const isChecked = computed({
   set: v => emits('update:checked', v),
 });
 
-let showPopup = ref(false),
+let refPopup = ref(),
   curText = ref('');
 
 function openAgreement(title: string, text: string) {
-  showPopup.value = true;
+  if(refPopup.value) refPopup.value.open();
   curText.value = text;
 }
-// function handleClick() {
-//   props.checked ? reportMatomo('勾选协议') : reportMatomo('取消勾选协议');
-// }
 </script>
