@@ -14,7 +14,7 @@
 import { ref } from 'vue';
 import './style.scss';
 
-const props = defineProps<{
+defineProps<{
   text: string;
 }>();
 

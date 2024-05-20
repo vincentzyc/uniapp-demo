@@ -37,7 +37,7 @@ let refPopup = ref(),
   curText = ref('');
 
 function openAgreement(title: string, text: string) {
-  if(refPopup.value) refPopup.value.open();
   curText.value = text;
+  if(refPopup.value) refPopup.value.open();
 }
 </script>
