@@ -2,7 +2,7 @@
   <div class="form-wrap">
     <FormName id="custName" v-model="formData.custName"></FormName>
     <FormIDCard id="idCardNo" v-model="formData.idCardNo"></FormIDCard>
-    <FormCity id="cityArr" v-model="formData.cityArr" ></FormCity>
+    <FormCity id="cityArr" v-model="formData.cityArr"></FormCity>
     <FormAddress id="address" v-model="formData.address"></FormAddress>
     <img src="@/assets/img/home/button.png" alt="提交按钮" class="breathlamp widthfull" @click="submitOrder()" />
     <Agreement title="填写并提交视为阅读并同意" :agrList="agrList" v-model:checked="checked" />
@@ -15,12 +15,9 @@ import FormAddress from '@/components/FormItem/FormAddress.vue';
 import FormIDCard from '@/components/FormItem/FormIDCard.vue';
 import FormCity from '@/components/FormItem/FormCity.vue';
 import Check from '@/utils/business/form-check';
-// import { useMainStore } from '@/pinia';
 import { closeLoading, openLoading } from '@/utils/loading';
-// import { CommonApi } from '@/api';
-// import { checkOut } from '@/composition/business/useVerifyData';
+import { reactive, ref, watch } from 'vue';
 import './style.scss';
-import { computed, reactive, ref, watch } from 'vue';
 
 // const FormCity = defineAsyncComponent(() => import('@/components/FormItem/FormCity.vue'));
 
@@ -66,15 +63,6 @@ let checked = ref(true),
     },
   ]);
 
-const showOtherForm = computed(() => {
-  if (formData.showForm) return true;
-  if (Check.checkPhone(formData.contactNumber) === true) {
-    formData.showForm = true;
-    return true;
-  }
-  return false;
-});
-
 watch(
   () => formData.cityArr,
   newValue => {
@@ -86,39 +74,30 @@ watch(
   }
 );
 
+function checkOut(formData: Record<string, any>): true | string {
+  console.log(formData)
+  // const checkResult = Check.checkForm(formData);
+  return true;
+}
 const submitOrder = async () => {
-  // var tip = checkOut(formData); //校验页面信息
-  // if (tip !== true) {
-  //   uni.showToast({ title: tip });
-  //   return false;
-  // }
+  var tip = checkOut(formData); //校验页面信息
+  if (tip !== true) {
+    uni.showToast({ title: tip });
+    return false;
+  }
   checked.value = true;
 
   openLoading('正在提交');
   const params = {
     url: window.location.href || '',
-    // pageId: mainStore.cjData?.pageId || '',
-    // pid: mainStore.pid || '',
-    // productCode: mainStore.cjData?.productCode || '',
     ...formData,
   };
   emits('submit');
-  // 调接口提交
   console.log('提交参数', params);
   setTimeout(() => {
     closeLoading();
     successCallback();
   }, 2000);
-  // let res = await CommonApi.submitForm<Record<string, any>>(params);
-  // if (res.responseCode === '0') {
-  //   successCallback({ resData: res, mediaCode: mainStore.cjData?.mediaCode });
-  // } else {
-  //   const newParam = { pid: params.pid, url: window.location.href };
-  //   let newRes = await CommonApi.pageIdLocation(newParam);
-  //   mainStore.setCjData(newRes);
-  //   closeLoading();
-  //   uni.showToast({ title: res.msg });
-  // }
 };
 function successCallback() {
   uni.showModal({
