@@ -74,13 +74,19 @@ watch(
   }
 );
 
-function checkOut(formData: Record<string, any>): true | string {
-  console.log(formData)
-  // const checkResult = Check.checkForm(formData);
+function checkForm(formData: Record<string, any>): true | string {
+  const checkName = Check.checkName(formData.custName);
+  if (checkName!== true) return checkName;
+  // const checkPhone = Check.checkPhone(formData.phone);
+  // if (checkPhone !== true) return checkPhone;
+  const checkIDCard = Check.checkIDCard(formData.idCardNo);
+  if (checkIDCard !== true) return checkIDCard;
+  const checkAddress = Check.checkAddress(formData.address);
+  if (checkAddress !== true) return checkAddress;
   return true;
 }
 const submitOrder = async () => {
-  var tip = checkOut(formData); //校验页面信息
+  var tip = checkForm(formData); //校验页面信息
   if (tip !== true) {
     uni.showToast({ title: tip });
     return false;
