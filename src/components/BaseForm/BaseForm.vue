@@ -88,7 +88,7 @@ function checkForm(formData: Record<string, any>): true | string {
 const submitOrder = async () => {
   var tip = checkForm(formData); //校验页面信息
   if (tip !== true) {
-    uni.showToast({ title: tip });
+    uni.showToast({ title: tip, icon: 'none' });
     return false;
   }
   checked.value = true;
