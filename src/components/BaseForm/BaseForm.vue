@@ -1,6 +1,7 @@
 <template>
   <div class="form-wrap">
     <FormName id="custName" v-model="formData.custName"></FormName>
+    <FormPhone id="phone" v-model="formData.phone"></FormPhone>
     <FormIDCard id="idCardNo" v-model="formData.idCardNo"></FormIDCard>
     <FormCity id="cityArr" v-model="formData.cityArr"></FormCity>
     <FormAddress id="address" v-model="formData.address"></FormAddress>
@@ -11,6 +12,7 @@
 
 <script lang="ts" setup>
 import FormName from '@/components/FormItem/FormName.vue';
+import FormPhone from '@/components/FormItem/FormPhone.vue';
 import FormAddress from '@/components/FormItem/FormAddress.vue';
 import FormIDCard from '@/components/FormItem/FormIDCard.vue';
 import FormCity from '@/components/FormItem/FormCity.vue';
@@ -45,6 +47,7 @@ const formData = reactive({
   address: '',
   contactNumber: '',
   idCardNo: '',
+  phone: '',
 });
 
 let checked = ref(true),
