@@ -5,7 +5,7 @@
       <input
         @blur="checkPhone(model)"
         :maxlength="11"
-        placeholder="输入有效联系电话并保持畅通"
+        placeholder="输入联系电话"
         type="tel"
         v-model.trim="model"
       />
