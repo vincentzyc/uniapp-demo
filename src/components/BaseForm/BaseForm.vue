@@ -35,8 +35,6 @@ const emits = defineEmits<{
   (e: 'submit'): void;
 }>();
 
-// const mainStore = useMainStore();
-
 const formData = reactive({
   cityArr: [],
   showForm: false,
@@ -80,8 +78,8 @@ watch(
 function checkForm(formData: Record<string, any>): true | string {
   const checkName = Check.checkName(formData.custName);
   if (checkName!== true) return checkName;
-  // const checkPhone = Check.checkPhone(formData.phone);
-  // if (checkPhone !== true) return checkPhone;
+  const checkPhone = Check.checkPhone(formData.phone);
+  if (checkPhone !== true) return checkPhone;
   const checkIDCard = Check.checkIDCard(formData.idCardNo);
   if (checkIDCard !== true) return checkIDCard;
   const checkAddress = Check.checkAddress(formData.address);
@@ -89,7 +87,7 @@ function checkForm(formData: Record<string, any>): true | string {
   return true;
 }
 const submitOrder = async () => {
-  var tip = checkForm(formData); //校验页面信息
+  var tip = checkForm(formData);
   if (tip !== true) {
     uni.showToast({ title: tip, icon: 'none' });
     return false;
