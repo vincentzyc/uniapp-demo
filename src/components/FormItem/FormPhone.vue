@@ -15,7 +15,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
-// import { checkPhone } from "@/composition/business/useVerifyData"
 
 export default defineComponent({
   name: 'FormPhone',
